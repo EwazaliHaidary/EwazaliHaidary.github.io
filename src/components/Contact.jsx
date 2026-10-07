@@ -52,7 +52,7 @@ const Contact = () => {
                 <div>
                   <p className="text-xs text-slate-500">Email</p>
                   <p className="mt-1 text-sm text-slate-300">
-                    your-email@example.com
+                    ewazalihaidary5@gmail.com
                   </p>
                 </div>
               </a>
@@ -65,7 +65,7 @@ const Contact = () => {
                 <div>
                   <p className="text-xs text-slate-500">Location</p>
                   <p className="mt-1 text-sm text-slate-300">
-                    Afghanistan
+                    Afghanistan Bamyan
                   </p>
                 </div>
               </div>
