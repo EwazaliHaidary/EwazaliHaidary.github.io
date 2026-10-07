@@ -1,7 +1,21 @@
 import { useState } from "react";
 import { Menu, X, Download } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+  <button
+  onClick={toggleTheme}
+  aria-label="Toggle theme"
+  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-cyan-400/30 hover:text-cyan-400"
+>
+  {theme === "dark" ? (
+    <Sun size={18} />
+  ) : (
+    <Moon size={18} />
+  )}
+</button>
 
   const navLinks = [
     { name: "Home", href: "#home" },
