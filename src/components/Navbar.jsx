@@ -1,21 +1,17 @@
 import { useState } from "react";
-import { Menu, X, Download } from "lucide-react";
-import { Sun, Moon } from "lucide-react";
+import profileImage from '../assets/images/my photo.jpeg'
+import {
+  Menu,
+  X,
+  Sun,
+  Moon,
+  Download,
+} from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  <button
-  onClick={toggleTheme}
-  aria-label="Toggle theme"
-  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-cyan-400/30 hover:text-cyan-400"
->
-  {theme === "dark" ? (
-    <Sun size={18} />
-  ) : (
-    <Moon size={18} />
-  )}
-</button>
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -26,24 +22,21 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 z-50 w-full border-b border-white/10 bg-slate-950/80 backdrop-blur-xl">
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
+    <nav className="fixed left-0 top-0 z-50 w-full border-b border-slate-200/10 bg-slate-950/80 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/80">
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
 
         {/* Logo */}
-        <a
-          href="#home"
-          className="group flex items-center gap-3"
-        >
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-blue-600 text-lg font-bold text-white shadow-lg shadow-cyan-500/20 transition-transform duration-300 group-hover:scale-105">
-            EH
+        <a href="#home" className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400 text-sm font-black text-slate-950">
+            <img src={profileImage} alt="EH"   className="mx-auto flex items-center justify-center overflow-hidden rounded-full border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 shadow-lg shadow-cyan-500/10"/>
           </div>
 
           <div className="hidden sm:block">
-            <h1 className="text-sm font-bold tracking-wider text-white">
+            <p className="text-sm font-bold text-white">
               EWAZ HAIDARY
-            </h1>
+            </p>
 
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500">
               Full-Stack Developer
             </p>
           </div>
@@ -55,107 +48,115 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
-              className="relative text-sm font-medium text-slate-300 transition-colors duration-300 hover:text-white
-              after:absolute after:-bottom-2 after:left-0 after:h-0.5 after:w-0 after:rounded-full
-              after:bg-cyan-400 after:transition-all after:duration-300
-              hover:after:w-full"
+              className="text-sm font-medium text-slate-400 transition-colors duration-300 hover:text-cyan-400"
             >
               {link.name}
             </a>
           ))}
         </div>
 
-        {/* Right Side */}
+        {/* Desktop Actions */}
         <div className="hidden items-center gap-3 md:flex">
+
+          {/* Theme Toggle */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/10 hover:text-cyan-400"
+          >
+            {theme === "dark" ? (
+              <Sun size={18} />
+            ) : (
+              <Moon size={18} />
+            )}
+          </button>
 
           {/* GitHub */}
           <a
-            href="https://GitHub.com/EwazaliHaidary"
+            href="https://github.com/EwazaliHaidary"
             target="_blank"
             rel="noreferrer"
-            aria-label="GitHub"
-            className="rounded-lg p-2.5 text-slate-400 transition-all duration-300 hover:bg-white/10 hover:text-white"
+            className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
           >
-            <span className="font-bold text-sm">GH</span>
+            GitHub
           </a>
 
           {/* LinkedIn */}
           <a
             href="#"
-            aria-label="LinkedIn"
-            className="rounded-lg p-2.5 text-slate-400 transition-all duration-300 hover:bg-white/10 hover:text-white"
+            className="text-sm font-medium text-slate-400 transition-colors hover:text-white"
           >
-            <span className="font-bold text-sm">in</span>
+            LinkedIn
           </a>
 
-          {/* CV */}
+          {/* Resume */}
           <a
             href="/Ewaz-Haidary-CV.pdf"
             download
-            className="ml-2 flex items-center gap-2 rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-4 py-2.5 text-sm font-semibold text-cyan-300 transition-all duration-300 hover:border-cyan-400/60 hover:bg-cyan-400/20 hover:text-cyan-200"
+            className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:border-cyan-400/30 hover:bg-cyan-400/10 hover:text-cyan-400"
           >
-            <Download size={17} />
+            <Download size={16} />
             Resume
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="rounded-lg p-2 text-slate-300 transition hover:bg-white/10 hover:text-white md:hidden"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={25} /> : <Menu size={25} />}
-        </button>
-      </nav>
+        {/* Mobile Actions */}
+        <div className="flex items-center gap-2 md:hidden">
+
+          {/* Theme Toggle */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:text-cyan-400"
+          >
+            {theme === "dark" ? (
+              <Sun size={18} />
+            ) : (
+              <Moon size={18} />
+            )}
+          </button>
+
+          {/* Mobile Menu */}
+          <button
+            type="button"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300"
+          >
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`overflow-hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-xl transition-all duration-300 md:hidden ${
-          isOpen
-            ? "max-h-96 opacity-100"
-            : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="mx-auto max-w-7xl px-6 py-5">
-
-          <div className="flex flex-col gap-1">
+      {isOpen && (
+        <div className="border-t border-white/10 bg-slate-950/95 px-6 py-5 backdrop-blur-xl md:hidden">
+          <div className="flex flex-col gap-2">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="rounded-lg px-4 py-3 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
+                className="rounded-xl px-4 py-3 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-cyan-400"
               >
                 {link.name}
               </a>
             ))}
-          </div>
-
-          <div className="mt-4 flex items-center gap-3 border-t border-white/10 pt-4">
 
             <a
-              href="https://GitHub.com/EwazaliHaidary"
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center gap-2 rounded-lg bg-white/5 px-4 py-2.5 text-sm text-slate-300 transition hover:bg-white/10 hover:text-white"
+              href="/Ewaz-Haidary-CV.pdf"
+              download
+              className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-cyan-400 px-4 py-3 text-sm font-bold text-slate-950"
             >
-              <span className="font-bold text-sm">GH</span>
-              GitHub
+              <Download size={16} />
+              Download Resume
             </a>
-
-            <a
-              href="#"
-              className="flex items-center gap-2 rounded-lg bg-white/5 px-4 py-2.5 text-sm text-slate-300 transition hover:bg-white/10 hover:text-white"
-            >
-             <span className="font-bold text-sm">in</span>
-              LinkedIn
-            </a>
-
           </div>
         </div>
-      </div>
-    </header>
+      )}
+    </nav>
   );
 };
 

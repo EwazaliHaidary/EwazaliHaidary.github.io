@@ -8,17 +8,20 @@ export const ThemeProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    document.documentElement.classList.toggle(
-      "dark",
-      theme === "dark"
-    );
+    const root = document.documentElement;
+
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
 
     localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((currentTheme) =>
-      currentTheme === "dark" ? "light" : "dark"
+    setTheme((current) =>
+      current === "dark" ? "light" : "dark"
     );
   };
 

@@ -1,5 +1,5 @@
 import { ArrowRight, Download } from "lucide-react";
-
+import profileImage from '../assets/images/my photo.jpeg'
 const Hero = () => {
   return (
     <section
@@ -102,8 +102,12 @@ const Hero = () => {
           <div className="relative w-80 rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl">
 
             {/* Avatar */}
-            <div className="mx-auto flex h-40 w-40 items-center justify-center rounded-full border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 text-5xl font-bold text-white shadow-lg shadow-cyan-500/10">
-              EH
+            <div className="mx-auto flex h-40 w-40 items-center justify-center overflow-hidden rounded-full border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 shadow-lg shadow-cyan-500/10">
+            <img
+                src={profileImage}
+                alt="Ewaz Haidary"
+                className="h-full w-full object-cover"
+            />
             </div>
 
             <div className="mt-7 text-center">

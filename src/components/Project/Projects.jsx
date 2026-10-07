@@ -1,5 +1,5 @@
 import ProjectCard from "./ProjectCard";
-
+import FuelStation from '../../../public/projects/fuelStation.png'
 const projects = [
   {
     title: "Fuel Station Management System",
@@ -11,7 +11,7 @@ const projects = [
       "Django REST Framework",
       "PostgreSQL",
     ],
-    image: "/projects/fuel-station.jpg",
+    image: {FuelStation},
     github: "https://github.com/EwazaliHaidary",
     demo: "#",
   },
