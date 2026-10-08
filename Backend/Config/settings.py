@@ -4,7 +4,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+import os
 import dj_database_url
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
@@ -13,10 +13,12 @@ import dj_database_url
 SECRET_KEY = 'django-insecure-^&dhpaj0*5%f+awn9^x8rjd3_r3b)kll=52d+20g^b-uy#y%^q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 ALLOWED_HOSTS = [
     "ewazalihaidary-github-io.onrender.com",
 ]
+
+
 
 
 # Application definition
