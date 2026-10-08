@@ -1,4 +1,18 @@
+import { useState, useEffect } from "react";
+import api from '../api/api'
 const About = () => {
+  const [profile, setProfile] = useState(null)
+
+  useEffect(()=>{
+    api.get("profile/")
+    .then(response =>{
+      setProfile(response.data)
+
+    })
+    .catch((error)=>{
+      console.error(error)
+    })
+  },[])
   return (
     <section
       id="about"
@@ -21,19 +35,7 @@ const About = () => {
 
             <div className="mt-7 space-y-5 text-base leading-8 text-slate-400">
               <p>
-                I'm a Computer Science student and Full-Stack Developer
-                focused on building modern and practical web applications.
-              </p>
-
-              <p>
-                My main focus is developing applications with React,
-                Django, Django REST Framework, and PostgreSQL. I enjoy
-                turning ideas into reliable and user-friendly products.
-              </p>
-
-              <p>
-                I'm continuously improving my skills in software
-                development, databases, APIs, and modern web technologies.
+                {profile?.about}
               </p>
             </div>
           </div>

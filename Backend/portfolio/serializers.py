@@ -17,16 +17,19 @@ class ProfileSerializer(serializers.ModelSerializer):
         read_only_fields = ("updated_at",)
 
 
+class SkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = "__all__"
+
 class SkillCategorySerializer(serializers.ModelSerializer):
+    skills = SkillSerializer(many =True, read_only=True)
     class Meta:
         model = SkillCategory
         fields = "__all__"
 
 
-class SkillSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Skill
-        fields = "__all__"
+
 
 
 class ProjectSerializer(serializers.ModelSerializer):

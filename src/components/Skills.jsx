@@ -1,45 +1,62 @@
+import { useState, useEffect } from "react";
+import api from '../api/api'
 const Skills = () => {
-  const skillGroups = [
-    {
-      title: "Frontend",
-      skills: [
-        "React",
-        "JavaScript",
-        "HTML5",
-        "CSS3",
-        "Tailwind CSS",
-        "Bootstrap",
-      ],
-    },
-    {
-      title: "Backend",
-      skills: [
-        "Python",
-        "Django",
-        "Django REST Framework",
-        "Laravel",
-        "PHP",
-      ],
-    },
-    {
-      title: "Database",
-      skills: [
-        "PostgreSQL",
-        "MySQL",
-        "SQLite",
-      ],
-    },
-    {
-      title: "Tools & Technologies",
-      skills: [
-        "Git",
-        "GitHub",
-        "Docker",
-        "Linux",
-        "REST API",
-      ],
-    },
-  ];
+  const [skillCategory, setSkillCatogory] = useState([])
+  
+
+
+  useEffect(()=>{
+    api.get("skillCategory/")
+    .then(response =>{
+      setSkillCatogory(response.data)
+
+    })
+    .catch((error)=>{
+      console.error(error)
+    })
+  },[])
+
+  // const skillGroups = [
+  //   {
+  //     title: "Frontend",
+  //     skills: [
+  //       "React",
+  //       "JavaScript",
+  //       "HTML5",
+  //       "CSS3",
+  //       "Tailwind CSS",
+  //       "Bootstrap",
+  //     ],
+  //   },
+  //   {
+  //     title: "Backend",
+  //     skills: [
+  //       "Python",
+  //       "Django",
+  //       "Django REST Framework",
+  //       "Laravel",
+  //       "PHP",
+  //     ],
+  //   },
+  //   {
+  //     title: "Database",
+  //     skills: [
+  //       "PostgreSQL",
+  //       "MySQL",
+  //       "SQLite",
+  //     ],
+  //   },
+  //   {
+  //     title: "Tools & Technologies",
+  //     skills: [
+  //       "Git",
+  //       "GitHub",
+  //       "Docker",
+  //       "Linux",
+  //       "REST API",
+  //     ],
+  //   },
+  // ];
 
   return (
     <section
@@ -63,29 +80,34 @@ const Skills = () => {
           </p>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {skillGroups.map((group) => (
-            <div
-              key={group.title}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-white/[0.05]"
-            >
-              <h3 className="text-lg font-semibold text-white">
-                {group.title}
-              </h3>
+       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+  {skillCategory.length > 0 ? (
+    skillCategory.map((group) => (
+      <div
+        key={group.id}
+        className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/30 hover:bg-white/[0.05]"
+      >
+        <h3 className="text-lg font-semibold text-white">
+          {group.name}
+        </h3>
 
-              <div className="mt-6 flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="rounded-lg border border-white/10 bg-slate-900 px-3 py-2 text-sm text-slate-300 transition-colors duration-300 hover:border-cyan-400/30 hover:text-cyan-300"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
+        <div className="mt-4">
+          {group.skills.map((skill) => (
+            <div
+              key={skill.id}
+              className="m-2 rounded-xl bg-cyan-700/10 hover:text-cyan-500 p-2 text-white text-center "
+            >
+              {skill.name}
             </div>
           ))}
         </div>
+      </div>
+    ))
+  ) : (
+    <div className="text-white">No content</div>
+  )}
+</div>
+     
 
       </div>
     </section>

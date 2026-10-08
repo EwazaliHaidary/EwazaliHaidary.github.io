@@ -1,6 +1,42 @@
 import { ArrowRight, Download } from "lucide-react";
-import profileImage from '../assets/images/my photo.jpeg'
+import { useState, useEffect } from "react";
+import api from '../api/api'
+
+const downloadCV = async () => {
+  try {
+    const response = await fetch(
+      `http://127.0.0.1:8000${profile?.resume}`
+    );
+
+    const blob = await response.blob();
+
+    const url = window.URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Ewaz-Haidary-CV.pdf";
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("CV download failed:", error);
+  }
+};
 const Hero = () => {
+  const [profile, setProfile] = useState(null)
+
+  useEffect(() => {
+    api.get("profile/")
+        .then((response) => {
+            setProfile(response.data);
+            
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+}, []);
   return (
     <section
       id="home"
@@ -27,19 +63,18 @@ const Hero = () => {
           <h1 className="text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
             Hi, I'm{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              Ewaz Haidary
+              {profile?.name}
             </span>
           </h1>
 
           {/* Role */}
           <h2 className="mt-6 text-2xl font-semibold text-slate-300 sm:text-3xl">
-            Full-Stack Developer
+            {profile?.title}
           </h2>
 
           {/* Description */}
           <p className="mt-6 max-w-2xl text-base leading-8 text-slate-400 sm:text-lg">
-            I build modern, responsive and scalable web applications
-            using React, Django, Django REST Framework and PostgreSQL.
+            {profile?.short_description}
           </p>
 
           {/* Buttons */}
@@ -57,14 +92,13 @@ const Hero = () => {
               />
             </a>
 
-            <a
-              href="/Ewaz-Haidary-CV.pdf"
-              download
-              className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:border-white/20 hover:bg-white/10"
-            >
-              <Download size={18} />
-              Download CV
-            </a>
+              <button
+                  onClick={downloadCV}
+                  className="group flex items-center gap-2 rounded-xl bg-cyan-400 px-6 py-3.5 text-sm font-bold text-slate-950 transition-all duration-300 hover:bg-cyan-300 hover:shadow-lg hover:shadow-cyan-500/20"
+                >
+                  <Download size={18} />
+                  Download CV
+                </button>
 
           </div>
 
@@ -72,7 +106,7 @@ const Hero = () => {
           <div className="mt-10 flex items-center gap-5">
 
             <a
-              href="https://github.com/EwazaliHaidary"
+              href={profile?.github_url}
               target="_blank"
               rel="noreferrer"
               className="text-sm font-medium text-slate-500 transition-colors duration-300 hover:text-white"
@@ -83,7 +117,7 @@ const Hero = () => {
             <span className="h-1 w-1 rounded-full bg-slate-700" />
 
             <a
-              href="#"
+              href={profile?.linkedin_url}
               className="text-sm font-medium text-slate-500 transition-colors duration-300 hover:text-white"
             >
               LinkedIn
@@ -93,7 +127,7 @@ const Hero = () => {
         </div>
 
         {/* Right Side */}
-        <div className="relative hidden justify-center lg:flex">
+        <div className="relative  justify-center lg:flex">
 
           {/* Outer Glow */}
           <div className="absolute h-80 w-80 rounded-full bg-cyan-400/10 blur-3xl" />
@@ -103,21 +137,21 @@ const Hero = () => {
 
             {/* Avatar */}
             <div className="mx-auto flex h-40 w-40 items-center justify-center overflow-hidden rounded-full border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 shadow-lg shadow-cyan-500/10">
-            <img
-                src={profileImage}
-                alt="Ewaz Haidary"
-                className="h-full w-full object-cover"
-            />
+          <img
+              src={`http://127.0.0.1:8000${profile?.profile_image}`}
+              alt="Ewaz Haidary"
+              className="h-full w-full object-cover"
+          />
             </div>
 
             <div className="mt-7 text-center">
 
               <h3 className="text-xl font-bold text-white">
-                Ewaz Haidary
+                {profile?.name}
               </h3>
 
               <p className="mt-2 text-sm text-slate-400">
-                Full-Stack Developer
+                {profile?.title}
               </p>
 
             </div>
