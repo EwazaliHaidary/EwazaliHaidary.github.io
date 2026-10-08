@@ -69,18 +69,14 @@ class Project(models.Model):
 
     github_url = models.URLField(blank=True)
     live_url = models.URLField(blank=True)
-
     skills = models.ManyToManyField(
         Skill,
         related_name="projects",
         blank=True
     )
-
     featured = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=0)
-
     created_at = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return self.title
 

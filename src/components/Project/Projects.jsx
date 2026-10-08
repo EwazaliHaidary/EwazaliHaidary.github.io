@@ -1,53 +1,66 @@
+import { useEffect, useState } from "react";
 import ProjectCard from "./ProjectCard";
-import FuelStation from '../../../public/projects/fuelStation.png'
-const projects = [
-  {
-    title: "Fuel Station Management System",
-    description:
-      "A full-stack management system designed to manage fuel sales, customers, staff, inventory, lending, finances, and daily business operations.",
-    technologies: [
-      "React",
-      "Django",
-      "Django REST Framework",
-      "PostgreSQL",
-    ],
-    image: {FuelStation},
-    github: "https://github.com/EwazaliHaidary",
-    demo: "#",
-  },
+import api from '../../api/api'
+// const projects = [
+//   {
+//     title: "Fuel Station Management System",
+//     description:
+//       "A full-stack management system designed to manage fuel sales, customers, staff, inventory, lending, finances, and daily business operations.",
+//     technologies: [
+//       "React",
+//       "Django",
+//       "Django REST Framework",
+//       "PostgreSQL",
+//     ],
+//     image: {},
+//     github: "https://github.com/EwazaliHaidary",
+//     demo: "#",
+//   },
 
-  {
-    title: "University Management System",
-    description:
-      "A web-based system for managing university-related information and administrative operations through a structured database.",
-    technologies: [
-      "React",
-      "Django",
-      "REST API",
-      "PostgreSQL",
-    ],
-    image: "/projects/university-management.jpg",
-    github: "https://github.com/EwazaliHaidary",
-    demo: "#",
-  },
+//   {
+//     title: "University Management System",
+//     description:
+//       "A web-based system for managing university-related information and administrative operations through a structured database.",
+//     technologies: [
+//       "React",
+//       "Django",
+//       "REST API",
+//       "PostgreSQL",
+//     ],
+//     image: "/projects/university-management.jpg",
+//     github: "https://github.com/EwazaliHaidary",
+//     demo: "#",
+//   },
 
-  {
-    title: "Online Library",
-    description:
-      "A modern online library application for managing books, authors, categories, users, and borrowing records.",
-    technologies: [
-      "Laravel",
-      "React",
-      "Tailwind CSS",
-      "MySQL",
-    ],
-    image: "/projects/online-library.jpg",
-    github: "https://github.com/EwazaliHaidary",
-    demo: "#",
-  },
-];
+//   {
+//     title: "Online Library",
+//     description:
+//       "A modern online library application for managing books, authors, categories, users, and borrowing records.",
+//     technologies: [
+//       "Laravel",
+//       "React",
+//       "Tailwind CSS",
+//       "MySQL",
+//     ],
+//     image: "/projects/online-library.jpg",
+//     github: "https://github.com/EwazaliHaidary",
+//     demo: "#",
+//   },
+// ];
 
 const Projects = () => {
+  const [projects, setProjects] = useState([])
+
+  useEffect(()=>{
+    api.get("project/")
+    .then(response =>{
+      setProjects(response.data)
+    })
+    .catch((error)=>{
+      console.error(error)
+    })
+    
+  },[])
   return (
     <section
       id="projects"
@@ -75,7 +88,7 @@ const Projects = () => {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
             <ProjectCard
-              key={project.title}
+              key={project.id}
               project={project}
             />
           ))}

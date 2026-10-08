@@ -33,6 +33,7 @@ class SkillCategorySerializer(serializers.ModelSerializer):
 
 
 class ProjectSerializer(serializers.ModelSerializer):
+    skills = SkillSerializer(many = True, read_only = True)
     class Meta:
         model = Project
         fields = "__all__"

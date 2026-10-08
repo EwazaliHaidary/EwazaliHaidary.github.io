@@ -1,6 +1,18 @@
+import { useState, useEffect } from "react";
+import api from '../api/api'
 import { GraduationCap } from "lucide-react";
 
 const Education = () => {
+  const[education, setEducation] = useState(null)
+  useEffect(() =>{
+    api.get("education/")
+    .then(response =>{
+      setEducation(response.data)
+    })
+    .catch((error)=>{
+      console.error(error)
+    })
+  }, [])
   return (
     <section
       id="education"
@@ -16,8 +28,11 @@ const Education = () => {
             Academic background
           </h2>
         </div>
-
-        <div className="max-w-3xl">
+    { education ?
+    education.map((e)=>(
+       <div className="max-w-3xl"
+       key={e.id}
+       >
           <div className="group rounded-2xl border border-white/10 bg-white/[0.03] p-7 transition-all duration-300 hover:border-cyan-400/30 hover:bg-white/[0.05]">
             <div className="flex gap-5">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/10">
@@ -29,26 +44,35 @@ const Education = () => {
 
               <div>
                 <h3 className="text-xl font-bold text-white">
-                  Bachelor's Degree in Computer Science
+                  {e.field}
                 </h3>
 
                 <p className="mt-2 text-sm text-cyan-400">
-                  Information Systems
+                  {e.institution}
                 </p>
 
                 <p className="mt-4 text-sm leading-7 text-slate-400">
-                  Currently studying Computer Science with a focus on
-                  Information Systems, software development, databases,
-                  and modern web technologies.
+                  {e.description}
                 </p>
 
-                <p className="mt-4 text-sm text-slate-500">
-                  Currently in Semester 7
+                <p className="mt-4 text-sm text-slate-500 ">
+                  Currently in Semester {e.degree}
                 </p>
+                
+                <p className="mt-4 text-sm text-slate-500 float-left">
+                start year  {e.start_year}
+                </p>
+                
+                <p className="mt-4 text-sm text-slate-500 float-right">
+                 end year: {e.end_year}
+                </p>
+                
               </div>
             </div>
           </div>
         </div>
+    )): "No education yet!"}
+       
       </div>
     </section>
   );

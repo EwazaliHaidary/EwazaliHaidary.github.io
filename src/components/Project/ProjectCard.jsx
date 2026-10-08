@@ -1,13 +1,17 @@
 import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
 
 const ProjectCard = ({ project }) => {
+  const [description , setDescription] = useState(false)
+
+
   return (
     <article className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition-all duration-500 hover:-translate-y-2 hover:border-cyan-400/30 hover:bg-white/[0.05]">
       
       {/* Project Image */}
       <div className="relative h-56 overflow-hidden bg-slate-900">
         <img
-          src={project.image}
+          src={`http://127.0.0.1:8000${project.image}`}
           alt={project.title}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
@@ -28,18 +32,32 @@ const ProjectCard = ({ project }) => {
           />
         </div>
 
-        <p className="mt-4 text-sm leading-7 text-slate-400">
+        {description && <p className="mt-4 text-sm leading-7 text-slate-400">
           {project.description}
-        </p>
-
+        </p>}
+        {!description && 
+         <p className="mt-4 text-sm leading-7 text-slate-400">
+          {project.description.slice(0,70)}
+          </p>
+        }
+        <button 
+          className={description ? 
+            "text-white p-1 rounded-md"
+            : " text-cyan-500"
+          }
+          onClick={()=> setDescription(!description)}
+          >
+            {!description ? "more...": "less___"}
+          
+          </button>
         {/* Technologies */}
         <div className="mt-5 flex flex-wrap gap-2">
-          {project.technologies.map((technology) => (
+          {project.skills.map((technology) => (
             <span
-              key={technology}
+              key={technology.id}
               className="rounded-lg border border-white/10 bg-slate-900 px-3 py-1.5 text-xs text-slate-300"
             >
-              {technology}
+              {technology.name}
             </span>
           ))}
         </div>
@@ -47,7 +65,7 @@ const ProjectCard = ({ project }) => {
         {/* Links */}
         <div className="mt-6 flex items-center gap-5">
           <a
-            href={project.github}
+            href={project.github_url}
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 text-sm font-medium text-slate-400 transition-colors hover:text-white"
