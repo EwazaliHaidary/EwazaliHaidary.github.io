@@ -4,13 +4,10 @@ from django.db import models
 class Profile(models.Model):
     name = models.CharField(max_length=100)
     title = models.CharField(max_length=255)
-
     short_description = models.TextField()
     about = models.TextField()
-
     email = models.EmailField(unique=True)
     location = models.CharField(max_length=255)
-
     github_url = models.URLField(blank=True)
     linkedin_url = models.URLField(blank=True)
 
