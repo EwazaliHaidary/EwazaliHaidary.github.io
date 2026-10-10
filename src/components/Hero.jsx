@@ -1,6 +1,7 @@
 import { ArrowRight, Download } from "lucide-react";
 import { useState, useEffect } from "react";
 import api from '../api/api'
+import image from '../assets/images/my photo.jpeg'
 
 const downloadCV = async () => {
   try {
@@ -138,7 +139,7 @@ const Hero = () => {
             {/* Avatar */}
             <div className="mx-auto flex h-40 w-40 items-center justify-center overflow-hidden rounded-full border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 shadow-lg shadow-cyan-500/10">
           <img
-              src={`http://127.0.0.1:8000${profile?.profile_image}`}
+              src={image}
               alt="Ewaz Haidary"
               className="h-full w-full object-cover"
           />

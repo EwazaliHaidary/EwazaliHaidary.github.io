@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from '../api/api'
+import profileImage  from '../assets/images/my photo.jpeg'
 import {
   Menu,
   X,
@@ -12,18 +13,7 @@ import { useTheme } from "../context/ThemeContext";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const [profile , setProfile] = useState(null)
-
-  useEffect(()=>{
-    api.get("profile/")
-    .then(response => {
-      setProfile(response.data)
-
-    })
-    .catch((error)=>{
-      console.error(error)
-    })
-  },[])
+  
   const navLinks = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
@@ -39,7 +29,7 @@ const Navbar = () => {
         {/* Logo */}
         <a href="#home" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400 text-sm font-black text-slate-950">
-            <img src={`http://127.0.0.1:8000/${profile?.profile_image}`} alt="EH"   className="mx-auto flex items-center justify-center overflow-hidden rounded-full border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 shadow-lg shadow-cyan-500/10"/>
+            <img src={profileImage} alt="EH"   className="mx-auto flex items-center justify-center overflow-hidden rounded-full border border-cyan-400/30 bg-gradient-to-br from-cyan-400/20 to-blue-600/20 shadow-lg shadow-cyan-500/10"/>
           </div>
 
           <div className="hidden sm:block">
