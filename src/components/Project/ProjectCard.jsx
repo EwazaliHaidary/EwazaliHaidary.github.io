@@ -11,7 +11,7 @@ const ProjectCard = ({ project }) => {
       {/* Project Image */}
       <div className="relative h-56 overflow-hidden bg-slate-900">
         <img
-          src={`http://127.0.0.1:8000${project.image}`}
+          src={`https://ewazalihaidary-github-io.onrender.com/api/project/${project.image}`}
           alt={project.title}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
@@ -37,7 +37,7 @@ const ProjectCard = ({ project }) => {
         </p>}
         {!description && 
          <p className="mt-4 text-sm leading-7 text-slate-400">
-          {project.description.slice(0,70)}
+          {project.description.slice(0,70)}...
           </p>
         }
         <button 
