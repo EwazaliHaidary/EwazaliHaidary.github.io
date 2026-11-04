@@ -166,7 +166,7 @@ const Contact = () => {
                 </span>
 
                 <div>
-                  <p className="text-xs text-slate-500">Phone</p>
+                  <p className="text-xs text-slate-500">Whatsapp</p>
                   <p className="mt-1 text-sm text-slate-300">
                     +93765668409
                   </p>
