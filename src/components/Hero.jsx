@@ -3,6 +3,14 @@ import { useState, useEffect } from "react";
 import api from '../api/api'
 import image from '../assets/images/my photo.jpeg'
 
+
+const Hero = () => {
+  const [profile, setProfile] = useState(null)
+  const phrases = [
+  profile?.name || "Ewazali Haidary",
+  "Full-Stack Developer",
+];
+
 const downloadCV = async () => {
   try {
     const response = await fetch(
@@ -25,8 +33,38 @@ const downloadCV = async () => {
     console.error("CV download failed:", error);
   }
 };
-const Hero = () => {
-  const [profile, setProfile] = useState(null)
+
+const [typedText, setTypedText] = useState("");
+const [phraseIndex, setPhraseIndex] = useState(0);
+const [isDeleting, setIsDeleting] = useState(false);
+
+useEffect(() => {
+  const currentText = phrases[phraseIndex];
+
+  let timeout;
+
+  if (!isDeleting) {
+    if (typedText.length < currentText.length) {
+      timeout = setTimeout(() => {
+        setTypedText(currentText.slice(0, typedText.length + 1));
+      }, 100);
+    } else {
+      timeout = setTimeout(() => setIsDeleting(true), 1500);
+    }
+  } else {
+    if (typedText.length > 0) {
+      timeout = setTimeout(() => {
+        setTypedText(typedText.slice(0, -1));
+      }, 50);
+    } else {
+      setIsDeleting(false);
+      setPhraseIndex((prev) => (prev + 1) % phrases.length);
+    }
+  }
+
+  return () => clearTimeout(timeout);
+}, [typedText, isDeleting, phraseIndex, profile?.name]);
+  
 
   useEffect(() => {
     api.get("profile/")
@@ -61,11 +99,12 @@ const Hero = () => {
           </div>
 
           {/* Heading */}
-          <h1 className="text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Hi, I'm{" "}
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-              {profile?.name}
-            </span>
+         <h1 className="text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
+  Hi, I'm{" "}
+  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+    {typedText}
+    <span className="animate-pulse">|</span>
+  </span>
           </h1>
 
           {/* Role */}
