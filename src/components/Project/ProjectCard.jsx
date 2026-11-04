@@ -11,7 +11,7 @@ const ProjectCard = ({ project }) => {
       {/* Project Image */}
       <div className="relative h-56 overflow-hidden bg-slate-900">
         <img
-          src={`https://ewazalihaidary-github-io.onrender.com/api/project/${project.image}`}
+          src={`https://ewazalihaidary-github-io.onrender.com/api/project?${project.image}`}
           alt={project.title}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />

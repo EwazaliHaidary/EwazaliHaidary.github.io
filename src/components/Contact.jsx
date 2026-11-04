@@ -2,6 +2,7 @@ import api from '../api/api'
 import {
   Mail,
   MapPin,
+  PhoneCall,
   Send,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -158,6 +159,27 @@ const Contact = () => {
                   </p>
                 </div>
               </div>
+              
+              <div className="flex items-center gap-4 text-slate-400">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                  <PhoneCall size={19} />
+                </span>
+
+                <div>
+                  <p className="text-xs text-slate-500">Phone</p>
+                  <p className="mt-1 text-sm text-slate-300">
+                    +93765668409
+                  </p>
+                </div>
+              </div>
+
+                <div>
+                  <p className="text-xs text-slate-500">ٔNote</p>
+                  <p className="mt-1 text-sm text-slate-300">
+                    if you contact me with Email or Whatsapp I will respond to you as soon as possible.
+                  </p>
+                </div>
+
             </div>
           </div>
 
