@@ -9,7 +9,7 @@ const Hero = () => {
   const [profile, setProfile] = useState(null)
   const phrases = [
   profile?.name || "Ewazali Haidary",
-  "Full-Stack Developer",
+  "Full-Stack Web Developer",
 ];
 
 const downloadCV = async () => {
