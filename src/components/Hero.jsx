@@ -2,6 +2,7 @@ import { ArrowRight, Download } from "lucide-react";
 import { useState, useEffect } from "react";
 import api from '../api/api'
 import image from '../assets/images/my photo.jpeg'
+import pen from '../assets/images/pen.png'
 
 
 const Hero = () => {
@@ -100,11 +101,11 @@ useEffect(() => {
 
           {/* Heading */}
          <h1 className="text-5xl font-bold leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl">
-  Hi, I'm{" "}
-  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-    {typedText}
-    <span className="animate-pulse">|</span>
-  </span>
+            Hi, I'm{" "}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              {typedText}
+              <span className="animate-pulse">|<img src={pen} alt=""  className="w-3 h-3"/></span>
+            </span>
           </h1>
 
           {/* Role */}
